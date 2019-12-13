@@ -1,0 +1,86 @@
+简单的说shell脚本就是将平时使用的各种Linux命令按顺序保存到一个文本文件，然后添加可执行权限，这个文件就成为一个shell脚本了。
+“#!/bin/bash”是一行特殊的脚本声明，表示此行以后的语句通过/bin/bash程序来解释执行；其他以“#”开头的表示注释信息；echo命令用于输出字符串，以使脚本的输出信息更容易读懂。1、如何向脚本传递参数？ $1
+2、如何在脚本中使用参数？第一个参数$1  第二个参数$2
+3、如何计算传递进来的参数？ $#
+4、如何在脚本中获取脚本名称？$0
+5、如何检查之前的命令是否运行成功？$?
+6、如何获取文件的最后一行？Tail -1
+7、如何获取文件第一行？Head -1
+8、如何获取文件每一行第三个元素？Awk ‘{print $3}’
+9、假如文件中每行第一个元素是FIND，如何获取第二个元素？Awk ‘{if（$1==”FIND”）print $2}’
+10、如何调试bash脚本？ 将 -xv参数加到#!/bin/bash后
+11、举例如何写一个函数？并调用
+Function example{
+Echo “hello world!”
+}
+Example
+12、如何连接两个字符串？
+V1=”hello”
+V2=”world”
+V3=${v1}${v2}
+Echo $v3
+13、如何进行两个整数的相加？
+A=1
+B=2
+Let C=$A+$B
+Echo $C
+
+Echo $(($A+$B))
+Echo $[$A+$B]
+Expr $A+$B
+Echo $A+$B|bc
+Awk ‘BEGIN{print ‘”$A”’+’”$B”’}’
+14、如何检查文件系统中是否存在某个文件？
+If [ -f /var/log/messages ]
+Then
+Echo “File exists”
+Fi
+15、写出shell脚本中所有循环语法？
+For i in $(ls)
+Do
+Echo item: $i
+Done
+
+COUNTER=0
+While [ $COUNTER -lt 10 ]
+Do
+Echo the counter is $COUNTER
+Let COUNTER=COUNTER+1
+Done
+
+COUNTER=20
+Until [ $COUNTER -lt 10 ]
+Do
+Echo COUNTER $COUNTER
+Let COUNTER-=1
+Done
+
+16、每个脚本开始的#!/bin/bash或#!/bin/sh表示什么意思？
+这一行说明使用的shell。#!/bin/bash表示脚本使用/bin/bash
+对于python脚本，就是#!/usr/bin/python(LCTT译注：这一行称之为释伴行)
+17、如何获取文本的第10行？
+Head -10 file|tail-1
+18、bash脚本文件的第一个符号是什么
+#
+19、命令：[ -z “”]&& echo 0 || echo 1 的输出是什么
+0
+20、命令 “export”有什么用？
+使变量在子shell中可用
+21、如何在后台运行脚本？  在脚本后面添加“&”
+22、Chmod 500 script 做什么？使脚本所有者拥有可执行权限
+23、 > 做什么？  重定向输出流到文件或另一个流
+24、& 和&&有什么区别
+& 希望脚本在后台运行
+&& 当前一个脚本成功完成才执行后面的命令/脚本的时候使用它
+25、什么时候要在[condition]之前使用“if”？
+当条件满足时需要运行多条命令的时候
+26、命令：name=john && echo’my name is $name’的输出是？John
+27、‘和” 引号有什么区别？
+‘ 当我们不希望把变量转换为值的时候使用它
+“ 会计算所有变量的值并用值代替
+28、命令 echo ${new:-variable}的输出是什么  variable
+29、如何用echo命令获取字符串变量的一部分？
+Echo ${variaable:x:y}
+X 起始位置
+Y 长度
+30、如何使用awk列出UID小于100的用户？ awk -F: ’$3<100’ /etc/passwd
